@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ecaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cases">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="200" />
+          <Property Name="description" Type="varchar" MaxLength="2000" />
+          <Property Name="clientid" Type="int" />
+          <Property Name="specialityid" Type="int" />
+          <Property Name="approvedlawyerid" Type="int" />
+        </EntityType>
+        <EntityType Name="quotes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="2000" />
+          <Property Name="price" Type="varchar" MaxLength="50" />
+          <Property Name="duration" Type="varchar" MaxLength="50" />
+          <Property Name="lawyerid" Type="int" />
+          <Property Name="caseid" Type="int" />
+        </EntityType>
+        <EntityType Name="regions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="1000" />
+          <Property Name="createdon" Type="datetime" />
+          <Property Name="updatedon" Type="datetime" />
+        </EntityType>
+        <EntityType Name="registration">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="50" />
+          <Property Name="lastname" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="location" Type="varchar" MaxLength="50" />
+          <Property Name="speciality" Type="varchar" MaxLength="2000" />
+          <Property Name="image" Type="varchar" MaxLength="2000" />
+          <Property Name="certificateno" Type="varchar" MaxLength="50" />
+          <Property Name="aboutme" Type="varchar" MaxLength="2000" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="accounttype" Type="varchar" MaxLength="50" />
+          <Property Name="token" Type="varchar" MaxLength="1000" />
+          <Property Name="status" Type="bit" />
+          <Property Name="createdon" Type="datetime" />
+          <Property Name="updatedon" Type="datetime" />
+        </EntityType>
+        <EntityType Name="specialities">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" />
+          <Property Name="createdon" Type="datetime" />
+          <Property Name="updatedon" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="ecaseModelStoreContainer">
+          <EntitySet Name="cases" EntityType="Self.cases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="quotes" EntityType="Self.quotes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="regions" EntityType="Self.regions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="registration" EntityType="Self.registration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="specialities" EntityType="Self.specialities" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ecaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="registration">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="accounttype" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="createdon" Type="DateTime" Precision="3" />
+          <Property Name="updatedon" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="speciality" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="certificateno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="aboutme" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="image" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="token" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="ecaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="registrations" EntityType="Self.registration" />
+          <EntitySet Name="regions" EntityType="ecaseModel.region" />
+          <EntitySet Name="specialities" EntityType="ecaseModel.speciality" />
+          <EntitySet Name="cases" EntityType="ecaseModel.case" />
+          <EntitySet Name="quotes" EntityType="ecaseModel.quote" />
+        </EntityContainer>
+        <EntityType Name="region">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="createdon" Type="DateTime" Precision="3" />
+          <Property Name="updatedon" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="speciality">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="createdon" Type="DateTime" Precision="3" />
+          <Property Name="updatedon" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="case">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="clientid" Type="Int32" />
+          <Property Name="specialityid" Type="Int32" />
+          <Property Name="approvedlawyerid" Type="Int32" />
+        </EntityType>
+        <EntityType Name="quote">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="duration" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lawyerid" Type="Int32" />
+          <Property Name="caseid" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ecaseModelStoreContainer" CdmEntityContainer="ecaseEntities">
+          <EntitySetMapping Name="registrations">
+            <EntityTypeMapping TypeName="ecaseModel.registration">
+              <MappingFragment StoreEntitySet="registration">
+                <ScalarProperty Name="token" ColumnName="token" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="aboutme" ColumnName="aboutme" />
+                <ScalarProperty Name="certificateno" ColumnName="certificateno" />
+                <ScalarProperty Name="speciality" ColumnName="speciality" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="accounttype" ColumnName="accounttype" />
+                <ScalarProperty Name="createdon" ColumnName="createdon" />
+                <ScalarProperty Name="updatedon" ColumnName="updatedon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="regions">
+            <EntityTypeMapping TypeName="ecaseModel.region">
+              <MappingFragment StoreEntitySet="regions">
+                <ScalarProperty Name="updatedon" ColumnName="updatedon" />
+                <ScalarProperty Name="createdon" ColumnName="createdon" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="specialities">
+            <EntityTypeMapping TypeName="ecaseModel.speciality">
+              <MappingFragment StoreEntitySet="specialities">
+                <ScalarProperty Name="updatedon" ColumnName="updatedon" />
+                <ScalarProperty Name="createdon" ColumnName="createdon" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cases">
+            <EntityTypeMapping TypeName="ecaseModel.case">
+              <MappingFragment StoreEntitySet="cases">
+                <ScalarProperty Name="approvedlawyerid" ColumnName="approvedlawyerid" />
+                <ScalarProperty Name="specialityid" ColumnName="specialityid" />
+                <ScalarProperty Name="clientid" ColumnName="clientid" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="quotes">
+            <EntityTypeMapping TypeName="ecaseModel.quote">
+              <MappingFragment StoreEntitySet="quotes">
+                <ScalarProperty Name="caseid" ColumnName="caseid" />
+                <ScalarProperty Name="lawyerid" ColumnName="lawyerid" />
+                <ScalarProperty Name="duration" ColumnName="duration" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
